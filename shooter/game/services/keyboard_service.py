@@ -5,40 +5,65 @@ from game.shared.point import Point
 class KeyboardService:
     """Detects player input. 
     
-    The responsibility of a KeyboardService is to indicate whether or not a key is up or down.
+    The responsibility of a KeyboardService is to detect player key presses and translate them into 
+    a point representing a direction.
 
     Attributes:
-        _keys (Dict[string, int]): The letter to key mapping.
+        cell_size (int): For scaling directional input to a grid.
     """
 
-    def __init__(self):
-        """Constructs a new KeyboardService."""
-        self._keys = {}
-        
-        self._keys['w'] = pyray.KEY_W
-        self._keys['a'] = pyray.KEY_A
-        self._keys['s'] = pyray.KEY_S
-        self._keys['d'] = pyray.KEY_D
-
-        self._keys['i'] = pyray.KEY_I
-        self._keys['j'] = pyray.KEY_J
-        self._keys['k'] = pyray.KEY_K
-        self._keys['l'] = pyray.KEY_L
-
-    def is_key_up(self, key):
-        """Checks if the given key is currently up.
+    def __init__(self, cell_size = 1):
+        """Constructs a new KeyboardService using the specified cell size.
         
         Args:
-            key (string): The given key (w, a, s, d or i, j, k, l)
+            cell_size (int): The size of a cell in the display grid.
         """
-        pyray_key = self._keys[key.lower()]
-        return pyray.is_key_up(pyray_key)
+        self._cell_size = cell_size
 
-    def is_key_down(self, key):
-        """Checks if the given key is currently down.
-        
-        Args:
-            key (string): The given key (w, a, s, d or i, j, k, l)
+    def get_direction(self, player):
+        """Gets the selected direction based on the currently pressed keys.
+
+        Returns:
+            Point: The selected direction.
         """
-        pyray_key = self._keys[key.lower()]
-        return pyray.is_key_down(pyray_key)
+        dx = 0
+        dy = 0
+
+        if player == 'one':
+            if pyray.is_key_down(pyray.KEY_A):
+                dx = -1
+            
+            if pyray.is_key_down(pyray.KEY_D):
+                dx = 1
+            
+            if pyray.is_key_down(pyray.KEY_W):
+                dy = -1
+            
+            if pyray.is_key_down(pyray.KEY_S):
+                dy = 1
+        elif player == 'two':
+            if pyray.is_key_down(pyray.KEY_J):
+                dx = -1
+        
+            if pyray.is_key_down(pyray.KEY_L):
+                dx = 1
+            
+            if pyray.is_key_down(pyray.KEY_I):
+                dy = -1
+            
+            if pyray.is_key_down(pyray.KEY_K):
+                dy = 1
+
+        direction = Point(dx, dy)
+        direction = direction.scale(self._cell_size)
+        
+        return direction
+
+    def is_shooting(self, player):
+        if player == 'one':
+            if pyray.is_key_down(pyray.KEY_X):
+                return True
+
+        elif player == 'two':
+            if pyray.is_key_down(pyray.KEY_M):
+                return True
