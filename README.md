@@ -1,5 +1,5 @@
 # Space shooter
-Space shooter is a game where each player tries defeat their enemies by firing lasers at them.
+Space shooter is a game where each player tries to defeat their enemies by shooting lasers at them.
 
 ## Rules
 The game is played according to the following rules.
@@ -12,7 +12,7 @@ The game is played according to the following rules.
     - Player one fires using X.
     - Player two fires using M.
 
-- If a player collides with a laser they loose.
+- If a player collides with a laser, it loses.
 
 ## Project structure
 ```
