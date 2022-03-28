@@ -12,7 +12,7 @@ The game is played according to the following rules.
     - Player one fires using X.
     - Player two fires using M.
 
-- If a player collides with a laser they loose.
+- If a player collides with a laser they lose.
 
 ## Project structure
 ```
