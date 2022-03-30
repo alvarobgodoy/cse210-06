@@ -31,13 +31,19 @@ def main():
     # create the cast
     cast = Cast()
     
-    # create the banner
-    banner = Actor()
-    banner.set_text("")
-    banner.set_font_size(FONT_SIZE)
-    banner.set_color(WHITE)
-    banner.set_position(Point(CELL_SIZE, 0))
-    cast.add_actor("banners", banner)
+    # Scores
+    cast.add_actor("scores", Actor())
+    cast.add_actor("scores", Actor())
+
+    scores = cast.get_actors('scores')
+    # Player one
+    scores[0].set_text('Player one: W, A, S, D, X')
+    scores[0].set_color(BLUE)
+    scores[0].set_position(Point(15, 0))
+    # Player two
+    scores[1].set_text('Player two: I, J, K, L, M')
+    scores[1].set_color(GREEN)
+    scores[1].set_position(Point(730, 0))
     
     # player one
     x = int(MAX_X / 3)

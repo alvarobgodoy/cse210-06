@@ -21,7 +21,7 @@ class Laser():
         laser = Actor()
         laser.set_text("o")
         laser.set_font_size(15)
-        laser.set_color(self._color)
+        laser.set_color(Color(255, 0, 0))
         laser.set_position(self._player_position)
         laser.set_velocity(self._player_direction)
 
